@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Repositorio encargado de gestionar el almacenamiento en memoria
- * de las incidencias. Esta simula una base de datos usando una lista.
+ * Maneja el almacenamiento en memoria de las incidencias.
  */
 @Repository
 public class IncidenciaRepository {
@@ -16,38 +15,44 @@ public class IncidenciaRepository {
     private List<Incidencia> lista = new ArrayList<>();
     private Long id = 1L;
 
-
-     // Retorna todas y cada una de las incidencias almacenadas.
-
     public List<Incidencia> getAll() {
         return lista;
     }
 
-     // Esta guarda una nueva incidencia en la lista.
-     // Ademas asigna automáticamente un ID incremental.
-
-    public Incidencia save(Incidencia incidencia) {
-        incidencia.setId(id++);
-        lista.add(incidencia);
-        return incidencia;
+    public Incidencia save(Incidencia i) {
+        i.setId(id++);
+        lista.add(i);
+        return i;
     }
 
-
-     // Se encarga de buscar a una incidencia por su ID.
-
     public Incidencia getById(Long id) {
-        for (Incidencia incidencia : lista) {
-            if (incidencia.getId().equals(id)) {
-                return incidencia;
+        for (Incidencia i : lista) {
+            if (i.getId().equals(id)) {
+                return i;
             }
         }
         return null;
     }
 
+    public Incidencia update(Long id, Incidencia nueva) {
+        Incidencia existente = getById(id);
 
-     // Se encarga de eliminar a una incidencia según su ID.
+        if (existente != null) {
+            existente.setTitulo(nueva.getTitulo());
+            existente.setDescripcion(nueva.getDescripcion());
+            existente.setEstado(nueva.getEstado());
+            existente.setPrioridad(nueva.getPrioridad());
+            existente.setUsuarioReportante(nueva.getUsuarioReportante());
+            return existente;
+        }
+
+        return null;
+    }
 
     public void delete(Long id) {
-        lista.removeIf(incidencia -> incidencia.getId().equals(id));
+        lista.removeIf(i -> i.getId().equals(id));
     }
 }
+
+
+

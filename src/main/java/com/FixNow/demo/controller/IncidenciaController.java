@@ -4,12 +4,12 @@ import com.FixNow.demo.model.Incidencia;
 import com.FixNow.demo.model.Estado;
 import com.FixNow.demo.service.IncidenciaService;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 
 /**
- * Controlador que expone los endpoints REST para la gestión de incidencias.
+ * Controlador que expone los endpoints REST.
  */
 @RestController
 @RequestMapping("/incidencias")
@@ -34,6 +34,11 @@ public class IncidenciaController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
         return service.getById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Incidencia i) {
+        return service.update(id, i);
     }
 
     @DeleteMapping("/{id}")

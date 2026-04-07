@@ -3,16 +3,15 @@ package com.FixNow.demo.service;
 import com.FixNow.demo.model.Incidencia;
 import com.FixNow.demo.model.Estado;
 import com.FixNow.demo.repository.IncidenciaRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * El servicio que contiene la lógica de negocio para la gestión de incidencias.
- * Este coordina las operaciones entre el Controlador y el Repositorio.
+ * Lógica de negocio de incidencias.
  */
 @Service
 public class IncidenciaService {
@@ -23,61 +22,81 @@ public class IncidenciaService {
         this.repo = repo;
     }
 
-
-     // Esta obtiene todas las incidencias registradas en el sistema.
-
     public List<Incidencia> getAll() {
         return repo.getAll();
     }
 
-    /**
-     * Registra una nueva incidencia en el sistema.
-     * Ademas que valida que los campos obligatorios no estén vacíos y asigna le asigna la fecha automáticamente.
-     */
-    public ResponseEntity<?> create(Incidencia incidencia) {
+    public ResponseEntity<?> create(Incidencia i) {
 
-        if (incidencia.getTitulo() == null || incidencia.getTitulo().isBlank()) {
+        if (i.getTitulo() == null || i.getTitulo().isBlank()) {
             return ResponseEntity.badRequest().body("{\"error\":\"El campo titulo no puede estar vacio\"}");
         }
 
-        if (incidencia.getDescripcion() == null || incidencia.getDescripcion().isBlank()) {
+        if (i.getDescripcion() == null || i.getDescripcion().isBlank()) {
             return ResponseEntity.badRequest().body("{\"error\":\"El campo descripcion no puede estar vacio\"}");
         }
 
-        if (incidencia.getUsuarioReportante() == null || incidencia.getUsuarioReportante().isBlank()) {
+        if (i.getUsuarioReportante() == null || i.getUsuarioReportante().isBlank()) {
             return ResponseEntity.badRequest().body("{\"error\":\"El campo usuarioReportante no puede estar vacio\"}");
         }
 
-        if (incidencia.getEstado() == null) {
+        if (i.getEstado() == null) {
             return ResponseEntity.badRequest().body("{\"error\":\"Estado no puede ser nulo\"}");
         }
 
-        if (incidencia.getPrioridad() == null) {
+        if (i.getPrioridad() == null) {
             return ResponseEntity.badRequest().body("{\"error\":\"Prioridad no puede ser nulo\"}");
         }
 
-        incidencia.setFechaRegistro(LocalDate.now());
-        return ResponseEntity.status(201).body(repo.save(incidencia));
+        i.setFechaRegistro(LocalDate.now());
+        return ResponseEntity.status(201).body(repo.save(i));
     }
-
-     // Busca una incidencia por su ID, en el caso de no encontrarla te manda el mensaje de "Incidencia no encontrada".
 
     public ResponseEntity<?> getById(Long id) {
-        Incidencia incidencia = repo.getById(id);
+        Incidencia i = repo.getById(id);
 
-        if (incidencia == null) {
+        if (i == null) {
             return ResponseEntity.status(404).body("{\"error\":\"Incidencia no encontrada\"}");
         }
-        return ResponseEntity.ok(incidencia);
+
+        return ResponseEntity.ok(i);
     }
 
+    public ResponseEntity<?> update(Long id, Incidencia i) {
 
-     // Elimina una incidencia por su ID, en el caso de no encontrarla te manda el mensaje de "Incidencia no encontrada".
+        if (i.getTitulo() == null || i.getTitulo().isBlank()) {
+            return ResponseEntity.badRequest().body("{\"error\":\"El campo titulo no puede estar vacio\"}");
+        }
+
+        if (i.getDescripcion() == null || i.getDescripcion().isBlank()) {
+            return ResponseEntity.badRequest().body("{\"error\":\"El campo descripcion no puede estar vacio\"}");
+        }
+
+        if (i.getUsuarioReportante() == null || i.getUsuarioReportante().isBlank()) {
+            return ResponseEntity.badRequest().body("{\"error\":\"El campo usuarioReportante no puede estar vacio\"}");
+        }
+
+        if (i.getEstado() == null) {
+            return ResponseEntity.badRequest().body("{\"error\":\"Estado no puede ser nulo\"}");
+        }
+
+        if (i.getPrioridad() == null) {
+            return ResponseEntity.badRequest().body("{\"error\":\"Prioridad no puede ser nulo\"}");
+        }
+
+        Incidencia actualizada = repo.update(id, i);
+
+        if (actualizada == null) {
+            return ResponseEntity.status(404).body("{\"error\":\"Incidencia no encontrada\"}");
+        }
+
+        return ResponseEntity.ok(actualizada);
+    }
 
     public ResponseEntity<?> delete(Long id) {
-        Incidencia incidencia = repo.getById(id);
+        Incidencia i = repo.getById(id);
 
-        if (incidencia == null) {
+        if (i == null) {
             return ResponseEntity.status(404).body("{\"error\":\"Incidencia no encontrada\"}");
         }
 
@@ -85,18 +104,15 @@ public class IncidenciaService {
         return ResponseEntity.noContent().build();
     }
 
-
-      // Esta filtra incidencias según su estado (ABIERTA, EN_PROCESO, RESUELTA, CERRADA) respectivamente.
-
     public List<Incidencia> getByEstado(Estado estado) {
         List<Incidencia> lista = new ArrayList<>();
 
-        for (Incidencia incidencia : repo.getAll()) {
-            if (incidencia.getEstado() == estado) {
-                lista.add(incidencia);
+        for (Incidencia i : repo.getAll()) {
+            if (i.getEstado() == estado) {
+                lista.add(i);
             }
         }
+
         return lista;
     }
 }
-
