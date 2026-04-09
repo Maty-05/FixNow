@@ -9,8 +9,9 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 /**
- * Controlador REST que expone los endpoints para gestionar incidencias.
+ * El controlador "REST" que expone los endpoints para gestionar incidencias.
  */
+
 @RestController
 @RequestMapping("/incidencias")
 public class IncidenciaController {
@@ -22,48 +23,54 @@ public class IncidenciaController {
     }
 
     /**
-     * Obtiene todas las incidencias registradas.
+     * Este obtiene todas las incidencias registradas.
      */
+
     @GetMapping
     public List<Incidencia> getAll() {
         return service.getAll();
     }
 
     /**
-     * Crea una nueva incidencia.
+     * Este crea una nueva incidencia.
      */
+
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Incidencia i) {
-        return service.create(i);
+    public ResponseEntity<?> create(@RequestBody Incidencia incidencia) {
+        return service.create(incidencia);
     }
 
     /**
-     * Obtiene una incidencia por su ID.
+     * Este obtiene una incidencia gracias a su ID.
      */
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
     /**
-     * Actualiza los datos de una incidencia existente.
+     * Este actualiza los datos de una incidencia que ya existe (una incidencia existente).
      */
+
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Incidencia i) {
-        return service.update(id, i);
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Incidencia incidencia) {
+        return service.update(id, incidencia);
     }
 
     /**
-     * Elimina una incidencia por su ID.
+     * Esta elimina una incidencia gracias a su ID.
      */
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return service.delete(id);
     }
 
     /**
-     * Filtra incidencias según su estado.
+     * Y por ultimo esta filtra incidencias según su estado (ABIERTA, EN_PROCESO, RESUELTA O CERRADA).
      */
+
     @GetMapping("/estado/{estado}")
     public List<Incidencia> getByEstado(@PathVariable Estado estado) {
         return service.getByEstado(estado);

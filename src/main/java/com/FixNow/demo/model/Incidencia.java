@@ -6,53 +6,59 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 /**
- * Modelo que representa una incidencia dentro del sistema.
- * Contiene la información principal reportada por un usuario.
+ * El modelo que representa una incidencia dentro del sistema.
+ * Este contiene la información principal reportada por un usuario.
  */
 public class Incidencia {
 
     private Long id;
 
     /**
-     * Título breve de la incidencia.
-     * No puede estar vacío y tiene un máximo de 100 caracteres.
+     * El título breve de la incidencia.
+     * No puede estar vacío y tiene un máximo de unos 100 caracteres.
      */
+
     @NotBlank
     @Size(max = 100)
     private String titulo;
 
     /**
-     * Descripción detallada del problema reportado.
+     * Una descripción detallada del problema reportado.
      */
+
     @NotBlank
     private String descripcion;
 
     /**
-     * Estado actual de la incidencia (flujo de trabajo).
+     * El estado actual de la incidencia.
      */
+
     @NotNull
     private Estado estado;
 
     /**
-     * Nivel de prioridad de la incidencia.
+     * El nivel de prioridad de la incidencia.
      */
+
     @NotNull
     private Prioridad prioridad;
 
     /**
-     * Usuario que reporta la incidencia.
+     * El usuario que reporta la incidencia.
      */
+
     @NotBlank
     private String usuarioReportante;
 
     /**
-     * Fecha en que se registra la incidencia en el sistema.
+     * La fecha en que se registra la incidencia en el sistema.
      */
+
     private LocalDate fechaRegistro;
 
     public Incidencia() {}
 
-    // Getters y setters
+    // Los Getters y setters
 
     public Long getId() {
         return id;
