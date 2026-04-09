@@ -15,7 +15,7 @@ public class Incidencia {
 
     /**
      * El título breve de la incidencia.
-     * No puede estar vacío y tiene un máximo de unos 100 caracteres.
+     * No puede estar vacío y tiene un máximo de unas 100 letras y/o caracteres.
      */
 
     @NotBlank
