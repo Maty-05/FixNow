@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Maneja el almacenamiento en memoria de las incidencias.
+ * Simula una base de datos en memoria para almacenar incidencias.
  */
 @Repository
 public class IncidenciaRepository {
@@ -15,25 +15,37 @@ public class IncidenciaRepository {
     private List<Incidencia> lista = new ArrayList<>();
     private Long id = 1L;
 
+    /**
+     * Retorna todas las incidencias almacenadas.
+     */
     public List<Incidencia> getAll() {
         return lista;
     }
 
-    public Incidencia save(Incidencia i) {
-        i.setId(id++);
-        lista.add(i);
-        return i;
+    /**
+     * Guarda una nueva incidencia asignándole un ID único.
+     */
+    public Incidencia save(Incidencia incidencia) {
+        incidencia.setId(id++);
+        lista.add(incidencia);
+        return incidencia;
     }
 
+    /**
+     * Busca una incidencia por su ID.
+     */
     public Incidencia getById(Long id) {
-        for (Incidencia i : lista) {
-            if (i.getId().equals(id)) {
-                return i;
+        for (Incidencia incidencia : lista) {
+            if (incidencia.getId().equals(id)) {
+                return incidencia;
             }
         }
         return null;
     }
 
+    /**
+     * Actualiza los datos de una incidencia existente.
+     */
     public Incidencia update(Long id, Incidencia nueva) {
         Incidencia existente = getById(id);
 
@@ -49,10 +61,10 @@ public class IncidenciaRepository {
         return null;
     }
 
+    /**
+     * Elimina una incidencia según su ID.
+     */
     public void delete(Long id) {
-        lista.removeIf(i -> i.getId().equals(id));
+        lista.removeIf(incidencia -> incidencia.getId().equals(id));
     }
 }
-
-
-
