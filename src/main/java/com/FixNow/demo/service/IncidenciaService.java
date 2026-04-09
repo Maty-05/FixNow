@@ -20,12 +20,14 @@ public class IncidenciaService {
     private IncidenciaRepository repo;
 
     public IncidenciaService(IncidenciaRepository repo) {
+
         this.repo = repo;
     }
 
      // Esta retorna todas las incidencias.
 
     public List<Incidencia> getAll() {
+
         return repo.getAll();
     }
 
@@ -36,29 +38,35 @@ public class IncidenciaService {
         // Validaciones básicas de entrada
 
         if (incidencia.getTitulo() == null || incidencia.getTitulo().isBlank()) {
-            return ResponseEntity.badRequest().body("{\"error\":\"El campo titulo no puede estar vacio\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"El campo titulo no puede estar vacio\"}");
         }
 
         if (incidencia.getDescripcion() == null || incidencia.getDescripcion().isBlank()) {
-            return ResponseEntity.badRequest().body("{\"error\":\"El campo descripcion no puede estar vacio\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"El campo descripcion no puede estar vacio\"}");
         }
 
         if (incidencia.getUsuarioReportante() == null || incidencia.getUsuarioReportante().isBlank()) {
-            return ResponseEntity.badRequest().body("{\"error\":\"El campo usuarioReportante no puede estar vacio\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"El campo usuarioReportante no puede estar vacio\"}");
         }
 
         if (incidencia.getEstado() == null) {
-            return ResponseEntity.badRequest().body("{\"error\":\"Estado no puede ser nulo\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"Estado no puede ser nulo\"}");
         }
 
         if (incidencia.getPrioridad() == null) {
-            return ResponseEntity.badRequest().body("{\"error\":\"Prioridad no puede ser nulo\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"Prioridad no puede ser nulo\"}");
         }
 
         // Se le asigna automáticamente la fecha actual
 
         incidencia.setFechaRegistro(LocalDate.now());
-        return ResponseEntity.status(201).body(repo.save(incidencia));
+        return ResponseEntity.status(201)
+                .body(repo.save(incidencia));
     }
 
      // Busca una incidencia por la ID.
@@ -67,7 +75,8 @@ public class IncidenciaService {
         Incidencia incidencia = repo.getById(id);
 
         if (incidencia == null) {
-            return ResponseEntity.status(404).body("{\"error\":\"Incidencia no encontrada\"}");
+            return ResponseEntity.status(404)
+                    .body("{\"error\":\"Incidencia no encontrada\"}");
         }
 
         return ResponseEntity.ok(incidencia);
@@ -80,29 +89,35 @@ public class IncidenciaService {
         // Validaciones básicas
 
         if (incidencia.getTitulo() == null || incidencia.getTitulo().isBlank()) {
-            return ResponseEntity.badRequest().body("{\"error\":\"El campo titulo no puede estar vacio\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"El campo titulo no puede estar vacio\"}");
         }
 
         if (incidencia.getDescripcion() == null || incidencia.getDescripcion().isBlank()) {
-            return ResponseEntity.badRequest().body("{\"error\":\"El campo descripcion no puede estar vacio\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"El campo descripcion no puede estar vacio\"}");
         }
 
         if (incidencia.getUsuarioReportante() == null || incidencia.getUsuarioReportante().isBlank()) {
-            return ResponseEntity.badRequest().body("{\"error\":\"El campo usuarioReportante no puede estar vacio\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"El campo usuarioReportante no puede estar vacio\"}");
         }
 
         if (incidencia.getEstado() == null) {
-            return ResponseEntity.badRequest().body("{\"error\":\"Estado no puede ser nulo\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"Estado no puede ser nulo\"}");
         }
 
         if (incidencia.getPrioridad() == null) {
-            return ResponseEntity.badRequest().body("{\"error\":\"Prioridad no puede ser nulo\"}");
+            return ResponseEntity.badRequest()
+                    .body("{\"error\":\"Prioridad no puede ser nulo\"}");
         }
 
         Incidencia actualizada = repo.update(id, incidencia);
 
         if (actualizada == null) {
-            return ResponseEntity.status(404).body("{\"error\":\"Incidencia no encontrada\"}");
+            return ResponseEntity.status(404)
+                    .body("{\"error\":\"Incidencia no encontrada\"}");
         }
 
         return ResponseEntity.ok(actualizada);
@@ -114,7 +129,8 @@ public class IncidenciaService {
         Incidencia incidencia = repo.getById(id);
 
         if (incidencia == null) {
-            return ResponseEntity.status(404).body("{\"error\":\"Incidencia no encontrada\"}");
+            return ResponseEntity.status(404)
+                    .body("{\"error\":\"Incidencia no encontrada\"}");
         }
 
         repo.delete(id);
