@@ -10,6 +10,7 @@ import java.util.List;
  * Esta simula una base de datos en la memoria para almacenar incidencias.
  */
 
+@SuppressWarnings("ALL")
 @Repository
 public class IncidenciaRepository {
 
