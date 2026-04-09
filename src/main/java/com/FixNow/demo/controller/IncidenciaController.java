@@ -22,54 +22,42 @@ public class IncidenciaController {
         this.service = service;
     }
 
-    /**
-     * Este obtiene todas las incidencias registradas.
-     */
+     // Este obtiene todas las incidencias registradas.
 
     @GetMapping
     public List<Incidencia> getAll() {
         return service.getAll();
     }
 
-    /**
-     * Este crea una nueva incidencia.
-     */
+     // Este crea una nueva incidencia.
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Incidencia incidencia) {
         return service.create(incidencia);
     }
 
-    /**
-     * Este obtiene una incidencia gracias a su ID.
-     */
+     // Este obtiene una incidencia gracias a su ID.
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
-    /**
-     * Este actualiza los datos de una incidencia que ya existe (una incidencia existente).
-     */
+     // Este actualiza los datos de una incidencia que ya existe (una incidencia existente).
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Incidencia incidencia) {
         return service.update(id, incidencia);
     }
 
-    /**
-     * Esta elimina una incidencia gracias a su ID.
-     */
+     // Esta elimina una incidencia gracias a su ID.
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return service.delete(id);
     }
 
-    /**
-     * Y por ultimo esta filtra incidencias según su estado (ABIERTA, EN_PROCESO, RESUELTA O CERRADA).
-     */
+     // Y por ultimo esta filtra incidencias según su estado (ABIERTA, EN_PROCESO, RESUELTA O CERRADA).
 
     @GetMapping("/estado/{estado}")
     public List<Incidencia> getByEstado(@PathVariable Estado estado) {

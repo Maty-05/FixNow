@@ -22,37 +22,27 @@ public class Incidencia {
     @Size(max = 100)
     private String titulo;
 
-    /**
-     * Una descripción detallada del problema reportado.
-     */
+     // Una descripción detallada del problema reportado.
 
     @NotBlank
     private String descripcion;
 
-    /**
-     * El estado actual de la incidencia.
-     */
+     // El estado actual de la incidencia.
 
     @NotNull
     private Estado estado;
 
-    /**
-     * El nivel de prioridad de la incidencia.
-     */
+     // El nivel de prioridad de la incidencia.
 
     @NotNull
     private Prioridad prioridad;
 
-    /**
-     * El usuario que reporta la incidencia.
-     */
+     // El usuario que reporta la incidencia.
 
     @NotBlank
     private String usuarioReportante;
 
-    /**
-     * La fecha en que se registra la incidencia en el sistema.
-     */
+     // La fecha en que se registra la incidencia en el sistema.
 
     private LocalDate fechaRegistro;
 

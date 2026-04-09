@@ -23,16 +23,14 @@ public class IncidenciaService {
         this.repo = repo;
     }
 
-    /**
-     * Esta retorna todas las incidencias.
-     */
+     // Esta retorna todas las incidencias.
+
     public List<Incidencia> getAll() {
         return repo.getAll();
     }
 
-    /**
-     * Esta valida y crea una nueva incidencia.
-     */
+     // Esta valida y crea una nueva incidencia.
+
     public ResponseEntity<?> create(Incidencia incidencia) {
 
         // Validaciones básicas de entrada
@@ -63,9 +61,7 @@ public class IncidenciaService {
         return ResponseEntity.status(201).body(repo.save(incidencia));
     }
 
-    /**
-     * Busca una incidencia por la ID.
-     */
+     // Busca una incidencia por la ID.
 
     public ResponseEntity<?> getById(Long id) {
         Incidencia incidencia = repo.getById(id);
@@ -77,13 +73,11 @@ public class IncidenciaService {
         return ResponseEntity.ok(incidencia);
     }
 
-    /**
-     * Esta valida y actualiza una incidencia existente.
-     */
+     // Esta tiene la funcion de validar y actualizar una incidencia existente.
 
     public ResponseEntity<?> update(Long id, Incidencia incidencia) {
 
-        // Validaciones muy básicas
+        // Validaciones básicas
 
         if (incidencia.getTitulo() == null || incidencia.getTitulo().isBlank()) {
             return ResponseEntity.badRequest().body("{\"error\":\"El campo titulo no puede estar vacio\"}");
@@ -114,9 +108,7 @@ public class IncidenciaService {
         return ResponseEntity.ok(actualizada);
     }
 
-    /**
-     * Esta elimina una incidencia si existe.
-     */
+     // Esta sirve para eliminar una incidencia ya existente.
 
     public ResponseEntity<?> delete(Long id) {
         Incidencia incidencia = repo.getById(id);
@@ -129,9 +121,7 @@ public class IncidenciaService {
         return ResponseEntity.noContent().build();
     }
 
-    /**
-     * Esta filtra incidencias por estado.
-     */
+     // Esta sirve para filtrar incidencias por el estado.
 
     public List<Incidencia> getByEstado(Estado estado) {
         List<Incidencia> lista = new ArrayList<>();

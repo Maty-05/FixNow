@@ -17,17 +17,14 @@ public class IncidenciaRepository {
     private List<Incidencia> lista = new ArrayList<>();
     private Long id = 1L;
 
-    /**
-     * Esta retorna todas las incidencias almacenadas.
-     */
+     // Esta retorna todas las incidencias almacenadas.
 
     public List<Incidencia> getAll() {
         return lista;
     }
 
-    /**
-     * Esta guarda una nueva incidencia asignándole un ID único.
-     */
+
+     // Esta guarda una nueva incidencia asignándole un ID único.
 
     public Incidencia save(Incidencia incidencia) {
         incidencia.setId(id++);
@@ -35,9 +32,7 @@ public class IncidenciaRepository {
         return incidencia;
     }
 
-    /**
-     * Esta unicamente busca una incidencia por su ID.
-     */
+     // Esta unicamente busca una incidencia por su ID.
 
     public Incidencia getById(Long id) {
         for (Incidencia incidencia : lista) {
@@ -48,9 +43,7 @@ public class IncidenciaRepository {
         return null;
     }
 
-    /**
-     * Esta actualiza los datos de una incidencia existente.
-     */
+     // Esta actualiza los datos de una incidencia existente.
 
     public Incidencia update(Long id, Incidencia nueva) {
         Incidencia existente = getById(id);
@@ -67,9 +60,7 @@ public class IncidenciaRepository {
         return null;
     }
 
-    /**
-     * Esta elimina una incidencia según su ID.
-     */
+     // Esta elimina una incidencia según su ID.
 
     public void delete(Long id) {
         lista.removeIf(incidencia -> incidencia.getId().equals(id));
